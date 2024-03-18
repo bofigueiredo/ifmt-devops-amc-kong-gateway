@@ -1,0 +1,23 @@
+Installing Kong's API Gateway with Docker
+https://www.youtube.com/watch?v=sJEID1xEZMg&list=PLg_AhYkg50vioBwQA1VTvxuDr-bX9Cb_7&index=16
+
+Docs
+https://docs.konghq.com/gateway/3.6.x/
+https://github.com/Kong/kong
+https://www.youtube.com/@KongInc/videos
+
+Forum
+https://discuss.konghq.com/
+
+
+API Gateway to TEST
+https://github.com/wso2/product-apim
+https://github.com/solo-io/gloo
+https://github.com/kubeshop/kusk-gateway
+https://github.com/TheLunarCompany/lunar
+https://github.com/traefik/traefik
+https://github.com/TykTechnologies/tyk
+
+
+Kubernets
+https://kubernetes.io/docs/tasks/tools/

@@ -1,0 +1,8 @@
+@env=localhost
+@openverse=http://{{env}}:8000/openverse
+
+###
+
+GET {{openverse}}/audio?q=test HTTP/1.1
+
+###

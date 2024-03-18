@@ -1,2 +1,13 @@
 # ifmt-devops-amc-kong-gateway
 Projeto para conclusão da matéria Arquitetura de Microserviços e Containers @ IFMT/2023  
+
+
+AUTH em API EXTERNAS
+	VAULT CREDENTIALS
+LOG DE AUDITORIA
+TRANSFORMATION RESPONSE
+INTEGRATE KEYCLOAK
+TELIMETRIA
+SECURITY POLICES
+	BLOCK RANGE IPS
+	RATE LIMIT
