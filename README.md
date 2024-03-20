@@ -105,26 +105,26 @@ docker compose up -d
 
 ## Mapeamento de Portas
 
- #                  | Host Port | Container Port | Obs
---------------------|-----------|----------------|------
-kong-db-postgres    |           | (5432)
-keycloak-db-postgres|           | (5432)
-keycloak            | 8081      | 8080           | [Keycloak](http://localhost:8081)
-pgadmin             | 8082      | 80             | [pgadmin](http://localhost:8082)
-kong-gateway        | 8000      | 8000           | [Roteamento HTTP](http://localhost:8000)
-|                   | 8443      | 8443           | Roteamento HTTPS
-|                   | 8001      | 8001           | [Admin API](http://localhost:8001)
-|                   | 8444      | 8444           | Admin API (HTTPS)
-|                   | 8002      | 8002           | [Kong Manager](http://localhost:8002)
-|                   | 8445      | 8445           | Kong Manager (HTTPS)
-|                   | 8003      | 8003           |       
-|                   | 8004      | 8004           |
+| #                   | Host Port | Container Port | Obs                                   |
+|---------------------|-----------|----------------|---------------------------------------|
+| kong-db-postgres    |           | (5432)         |                                       | 
+| keycloak-db-postgres|           | (5432)         |                                       | 
+| keycloak            | 8081      | 8080           | [Keycloak](http://localhost:8081)     |
+| pgadmin             | 8082      | 80             | [pgadmin](http://localhost:8082)      |
+| kong-gateway        | 8000      | 8000           | [Roteamento HTTP](http://localhost:8000) |
+|                     | 8443      | 8443           | Roteamento HTTPS                      |
+|                     | 8001      | 8001           | [Admin API](http://localhost:8001)    |
+|                     | 8444      | 8444           | Admin API (HTTPS)                     |
+|                     | 8002      | 8002           | [Kong Manager](http://localhost:8002) |
+|                     | 8445      | 8445           | Kong Manager (HTTPS)                  |
+|                     | 8003      | 8003           |                                       |
+|                     | 8004      | 8004           |                                       |
 
 
- #       | Host Port | Container Port | Obs
----------|-----------|----------------|------
-backend  | 9090      | 9090           | [API NodeJS + Express](http://localhost:9090)
-frontend | 4200      | 4200           | [Angular App](http://localhost:4200)
+| #        | Host Port | Container Port | Obs                                              |   
+|----------|-----------|----------------|--------------------------------------------------|
+| backend  | 9090      | 9090           | [API NodeJS + Express](http://localhost:9090)    |
+| frontend | 4200      | 4200           | [Angular App](http://localhost:4200)             |
 
 
 ## Kong
