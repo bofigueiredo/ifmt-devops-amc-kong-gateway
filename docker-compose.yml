@@ -7,13 +7,11 @@ services:
     shm_size: 128mb
     environment:
       - POSTGRES_DB=kong
-      - POSTGRES_USER=kong
-      - POSTGRES_PASSWORD=kong
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - kong-db-postgres-volume:/var/lib/postgresql/data
-    ports:
-      - 15432:5432
     networks:
       - kong-net
     healthcheck:
@@ -25,26 +23,11 @@ services:
           "-d",
           "kong",
           "-U",
-          "kong"
+          "admin"
         ]
       timeout: 45s
       interval: 10s
       retries: 10
-
-  kong-db-pgadmin:
-    image: "dpage/pgadmin4:8.4"
-    container_name: kong-db-pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: kong@kong.com
-      PGADMIN_DEFAULT_PASSWORD: kong
-    ports:
-      - 8080:80
-    depends_on:
-      - kong-db-postgres
-    volumes:
-      - kong-db-pgadmin-volume:/var/lib/pgadmin
-    networks:
-      - kong-net
 
   kong-migrations:
     image: kong/kong-gateway:3.6.1.1
@@ -53,8 +36,8 @@ services:
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-db-postgres
-      KONG_PG_PASSWORD: kong
-      KONG_PASSWORD: kong
+      KONG_PG_USER: admin
+      KONG_PG_PASSWORD: admin
     networks:
       - kong-net
     depends_on:
@@ -66,8 +49,8 @@ services:
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-db-postgres
-      - KONG_PG_USER=kong
-      - KONG_PG_PASSWORD=kong
+      - KONG_PG_USER=admin
+      - KONG_PG_PASSWORD=admin
       - KONG_PROXY_ACCESS_LOG=/dev/stdout
       - KONG_ADMIN_ACCESS_LOG=/dev/stdout
       - KONG_PROXY_ERROR_LOG=/dev/stderr
@@ -88,12 +71,74 @@ services:
     depends_on:
       - kong-migrations
 
+  keycloak-db-postgres:
+    image: postgres:13
+    container_name: keycloak-db-postgres
+    shm_size: 128mb
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - keycloak-db-postgres-volume:/var/lib/postgresql/data
+    networks:
+      - kong-net
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-q",
+          "-d",
+          "keycloak",
+          "-U",
+          "admin"
+        ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
 
+  keycloak:
+    image: bitnami/keycloak:23.0.7
+    container_name: keycloak
+    ports:
+      - '8081:8080'
+    restart: always
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+      KEYCLOAK_DATABASE_HOST: keycloak-db-postgres
+      KEYCLOAK_DATABASE_PORT: 5432
+      KEYCLOAK_DATABASE_NAME: keycloak
+      KEYCLOAK_DATABASE_USER: admin
+      KEYCLOAK_DATABASE_PASSWORD: admin
+    networks:
+      - kong-net
+    depends_on:
+      - keycloak-db-postgres
+
+
+  pgadmin:
+    image: "dpage/pgadmin4:8.4"
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 8082:80
+    volumes:
+      - pgadmin-volume:/var/lib/pgadmin
+    networks:
+      - kong-net
 
 volumes:
   kong-db-postgres-volume:
     external: true
-  kong-db-pgadmin-volume:
+  keycloak-db-postgres-volume:
+    external: true
+  pgadmin-volume:
     external: true
 
 networks:
