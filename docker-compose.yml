@@ -15,33 +15,10 @@ services:
     networks:
       - kong-net
     healthcheck:
-      test:
-        [
-          "CMD",
-          "pg_isready",
-          "-q",
-          "-d",
-          "kong",
-          "-U",
-          "admin"
-        ]
+      test: ["CMD", "pg_isready", "-q", "-d", "kong", "-U", "admin"]
       timeout: 45s
       interval: 10s
       retries: 10
-
-  kong-migrations:
-    image: kong/kong-gateway:3.6.1.1
-    container_name: kong-migrations
-    command: kong migrations bootstrap
-    environment:
-      KONG_DATABASE: postgres
-      KONG_PG_HOST: kong-db-postgres
-      KONG_PG_USER: admin
-      KONG_PG_PASSWORD: admin
-    networks:
-      - kong-net
-    depends_on:
-      - kong-db-postgres
 
   kong-gateway:
     image: kong/kong-gateway:3.6.1.1
@@ -69,7 +46,7 @@ services:
     networks:
       - kong-net
     depends_on:
-      - kong-migrations
+      - kong-db-postgres
 
   keycloak-db-postgres:
     image: postgres:13
@@ -85,16 +62,7 @@ services:
     networks:
       - kong-net
     healthcheck:
-      test:
-        [
-          "CMD",
-          "pg_isready",
-          "-q",
-          "-d",
-          "keycloak",
-          "-U",
-          "admin"
-        ]
+      test: ["CMD", "pg_isready", "-q", "-d", "keycloak", "-U", "admin"]
       timeout: 45s
       interval: 10s
       retries: 10

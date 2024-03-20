@@ -80,21 +80,17 @@ Você precisará ter instalado na sua maquina:
 
           
 
-1. Crie manualmente os volumes e a rede que será utilizada pelo docker ou execute o script "./create-network-volume.sh"
+1. Execute o script "./build.sh"
 
+    **[!ATENÇÃO!]** - O script deverá ser executado apenas na primeira vez, pois ele irá criar os volumes, rede e executar o migrations do Kong Gateway 
 
-```bash
-docker volume create keycloak-db-postgres-volume
-docker volume create kong-db-postgres-volume
-docker volume create pgadmin-volume
+    * Executar novamente o script irá apagar o ambiente e criá-lo novamente.
 
-docker network create kong-net
-```
 2. Iniciando os containers com o docker compose
 
-```
-docker compose up -d
-```
+    ```
+    docker compose up -d
+    ```
 3. Abra a pasta **"./app/"** no **Visual Studio Code**
 4. Pressino \<F1> e busque a ação: **"Dev Containers: Reopen in Container"**
 5. Abra dois terminais dentro do **Visual Studio Code** 
@@ -127,7 +123,7 @@ docker compose up -d
 | frontend | 4200      | 4200           | [Angular App](http://localhost:4200)             |
 
 
-## Kong
+## Material de apoio
 
 - [Installing Kong's API Gateway with Docker](https://www.youtube.com/watch?v=sJEID1xEZMg&list=PLg_AhYkg50vioBwQA1VTvxuDr-bX9Cb_7&index=16)
 
