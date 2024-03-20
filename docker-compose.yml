@@ -58,7 +58,7 @@ services:
       - POSTGRES_PASSWORD=admin
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - keycloak-db-postgres-volume:/var/lib/postgresql/data
+      - ./volumes/db/keycloak:/var/lib/postgresql/data
     networks:
       - kong-net
     healthcheck:
@@ -103,8 +103,6 @@ services:
 
 volumes:
   kong-db-postgres-volume:
-    external: true
-  keycloak-db-postgres-volume:
     external: true
   pgadmin-volume:
     external: true

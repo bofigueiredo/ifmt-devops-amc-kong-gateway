@@ -16,7 +16,7 @@ const kcConfig = {
   serverUrl: "http://192.168.15.23:8081",
   realm: "master",
   realmPublicKey:
-    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjHA3ZP9Kp9HAMGzHex/Htl85AAkLWu7X1yR2lfvT/hEoMsgBlwufUNAsrzVgfoXbolqntZluLeVmie0TZTY0goeU9Fr1Xo7vGebnRwecC8XSS23n+cGweUGT7OstBIh4kN7zAS/O02jG2i9fC92bqh4rtGw0oe2T1iyZU24N4SgUu6VUVBHBvM204P3QDHwuqvW4/RtQo7LY4Dw+UipzaGhVRszAwABny2OICvIX3QYvtaXsxgEXSThRiwQLQyyGy03vwYbvcOCM73AvMSoAHkyz3DdvkkugZPfv9sbaXs/ZbjR1+Wq8FnVO9roBwbMB4eqRUA+BNfHesRZw4CjiqQIDAQAB",
+    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz/TlanmGznylX+gr0H7StrUaq60pVjQ0nP6p9Cc7CBxZ9HKu+B0Kt05w2cSe5g8E+T/BMfve9pOO/Zucmd6DbrjtePpzmqNUStk42Z+JGTCOMl7MMGlK6ElFPzL5Ze2sHc08swNQV105gDAzOlnR0mEJQk9uWpx/qZ6uAhDEZcwmwGfOAUUHCw/oLwj5/xFQGN7tx6bd9vfOo2S2aipK8qZlwLfkMmccj0BYs47VY7jopNs1c1ee6hI89pcMi7EcHKMhQnqtm1Gmy0T0cV30yQsgF7rcuUvRbno24/HUzssnrtizN7zvKe4KvEz/3Tc0dB1LA73IxZPBlhfFnYkEeQIDAQAB",
 };
 
 const session = require('express-session');
@@ -37,6 +37,8 @@ interface Theme { id: number; tema: string; }
 const iaList: Theme[] = iaData;
 const devopsList: Theme[] = devopsData;
 
+
+//app.get("/ia", (req: Request, res: Response) => {
 app.get("/ia", keycloak.protect('realm:ia-list'), (req: Request, res: Response) => {
   res.json(iaList);
 });

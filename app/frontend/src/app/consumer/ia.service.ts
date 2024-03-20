@@ -6,7 +6,7 @@ import { Generic } from './generic.model';
 @Injectable({ providedIn: 'root'})
 export class IaService {
 
-  private readonly backendUrl = 'http://192.168.15.23:8000';
+  private readonly backendUrl = 'http://localhost:9090';
 
   constructor(private http: HttpClient) {}
 
