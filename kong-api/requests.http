@@ -1,0 +1,267 @@
+@url-base-api=http://localhost:8001
+@url-base-route=http://localhost:8000
+
+
+#
+# Server
+#
+
+### Status 
+GET {{url-base-api}}/status HTTP/1.1
+
+
+### Log Level
+GET {{url-base-api}}/debug/node/log-level HTTP/1.1
+
+
+### Log Level (debug, info, notice, warn, error, crit)
+PUT {{url-base-api}}/debug/node/log-level/debug HTTP/1.1
+
+
+
+#
+# Services
+#
+
+###
+GET {{url-base-api}}/services HTTP/1.1
+
+
+###
+POST {{url-base-api}}/services HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": "ba2db486-3adf-44cb-b037-964da1facf55",
+  "name": "service-backend-ia",
+  "url": "http://backend:9090/ia"
+}
+
+###
+DELETE {{url-base-api}}/services/ba2db486-3adf-44cb-b037-964da1facf55 HTTP/1.1
+
+
+
+#
+# Routes
+#
+
+###
+GET {{url-base-api}}/routes HTTP/1.1
+
+
+###
+POST {{url-base-api}}/routes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": "1187bce3-1cbf-4a85-a489-f1ba49c62fef",  
+  "service": {
+    "id": "ba2db486-3adf-44cb-b037-964da1facf55"
+  },
+  "name": "route-backend-ia",
+  "paths": [
+    "/backend/ia"
+  ]
+}
+
+###
+POST {{url-base-api}}/routes HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": "3aeb21fa-8b43-40f8-a3e8-2dae99d9734e",
+  "service": {
+    "id": "ba2db486-3adf-44cb-b037-964da1facf55"
+  },
+  "name": "route-backend-ia-altenativa",
+  "paths": [
+    "/backend/ai"
+  ]
+}
+
+###
+DELETE {{url-base-api}}/routes/1187bce3-1cbf-4a85-a489-f1ba49c62fef HTTP/1.1
+
+###
+DELETE {{url-base-api}}/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e HTTP/1.1
+
+#
+# Plugins
+#
+
+###
+GET {{url-base-api}}/plugins HTTP/1.1
+
+
+# IP RESTRITCTION
+###
+POST {{url-base-api}}/services/ba2db486-3adf-44cb-b037-964da1facf55/plugins HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "8e2b3ef6-22e8-4496-b158-51be5d713714",
+    "enabled": true,
+    "name": "ip-restriction",
+    "route": {
+        "id": "3aeb21fa-8b43-40f8-a3e8-2dae99d9734e"
+    },
+    "instance_name": "ip-restriction-backend-ia-route2",
+    "config": {
+        "allow": [
+            "200.200.200.200"
+        ],
+        "message": "Seu IP foi banido",
+        "status": 403
+    }
+}
+
+###
+DELETE {{url-base-api}}/plugins/8e2b3ef6-22e8-4496-b158-51be5d713714 HTTP/1.1
+
+
+
+# REQUEST TERMINATION
+
+###
+POST {{url-base-api}}/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "29e47017-8577-4065-83dc-ce57d2a0dc6a",
+    "name": "request-termination",
+    "route": {
+        "id": "3aeb21fa-8b43-40f8-a3e8-2dae99d9734e"
+    },
+    "instance_name": "request-termination-backend-ia-route2",
+    "config": {
+        "body": "{  \"status\": 503,   \"error\": \"Service Unavailable\",   \"message\": \"The service is temporarily unavailable. Please try again later.\"}",
+        "content_type": "application/json",
+        "status_code": 503
+    }
+}
+
+
+###
+DELETE {{url-base-api}}/plugins/29e47017-8577-4065-83dc-ce57d2a0dc6a HTTP/1.1
+
+
+
+
+# REQUEST SIZE LIMITING
+
+###
+POST {{url-base-api}}/plugins HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "df7e0211-9862-4ff7-b82a-01efac9c7a1b",
+    "name": "request-size-limiting",
+    "instance_name": "global-request-size-limiting",
+    "config": {
+        "allowed_payload_size": 128,
+        "require_content_length": false,
+        "size_unit": "megabytes"
+    }
+}
+
+###
+DELETE {{url-base-api}}/plugins/df7e0211-9862-4ff7-b82a-01efac9c7a1b HTTP/1.1
+
+
+###
+GET {{url-base-route}}/backend/ai HTTP/1.1
+Content-Type: text/plain
+
+Request size limit exceeded
+
+###
+POST {{url-base-api}}/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "698c33d4-d949-4f7b-a1f5-8c466b86c455",
+    "name": "request-size-limiting",
+    "route": {
+        "id": "3aeb21fa-8b43-40f8-a3e8-2dae99d9734e"
+    },
+    "config": {
+        "allowed_payload_size": 7,
+        "require_content_length": false,
+        "size_unit": "bytes"
+    }
+}
+
+
+###
+DELETE {{url-base-api}}/plugins/698c33d4-d949-4f7b-a1f5-8c466b86c455 HTTP/1.1
+
+
+
+# PROXY CACHE
+
+
+###
+POST {{url-base-api}}/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "a7c5fd07-3b20-4c42-a697-783f914b0d7f",
+    "name": "proxy-cache",
+    "route": {
+        "id": "3aeb21fa-8b43-40f8-a3e8-2dae99d9734e"
+    },
+    "config": {
+        "cache_control": false,
+        "cache_ttl": 10,
+        "content_type": [
+            "application/json; charset=utf-8"
+        ],
+        "request_method": [
+            "GET",
+            "HEAD"
+        ],
+        "response_code": [
+            200
+        ],
+        "strategy": "memory"
+    }
+}
+
+###
+GET {{url-base-route}}/backend/ai HTTP/1.1
+
+
+###
+DELETE {{url-base-api}}/plugins/a7c5fd07-3b20-4c42-a697-783f914b0d7f HTTP/1.1
+
+
+# RATE LIMITING
+
+###
+POST {{url-base-api}}/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "d8516bd3-ddb2-413c-b6fe-9925a3d3729b",
+    "name": "rate-limiting",
+    "route": {
+        "id": "3aeb21fa-8b43-40f8-a3e8-2dae99d9734e"
+    },
+    "config": {
+        "error_code": 429,
+        "error_message": "API rate limit exceeded",
+        "month": 300,
+        "hour": 100,
+        "minute": 30,
+        "second": 10,
+        "policy": "local"
+    }
+}
+
+###
+GET {{url-base-route}}/backend/ai HTTP/1.1
+
+
+###
+DELETE {{url-base-api}}/plugins/d8516bd3-ddb2-413c-b6fe-9925a3d3729b HTTP/1.1

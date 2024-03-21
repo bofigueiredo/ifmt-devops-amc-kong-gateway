@@ -1,0 +1,660 @@
+{
+	"info": {
+		"_postman_id": "f63fe94e-16c6-4a88-9ea7-1ce5b72e7a75",
+		"name": "Kong Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "367747"
+	},
+	"item": [
+		{
+			"name": "Server",
+			"item": [
+				{
+					"name": "Server Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get LogLevel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/debug/node/log-level",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"debug",
+								"node",
+								"log-level"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set LogLevel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// debug, info, notice, warn, error, and crit",
+									"// ref https://docs.konghq.com/gateway/latest/production/logging/"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/debug/cluster/log-level/debug",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"debug",
+								"cluster",
+								"log-level",
+								"debug"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Services - List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Services - Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"ba2db486-3adf-44cb-b037-964da1facf55\",\n  \"name\": \"service-backend-ia\",\n  \"url\": \"http://backend:9090/ia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Services - Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/services/ba2db486-3adf-44cb-b037-964da1facf55",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"ba2db486-3adf-44cb-b037-964da1facf55"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Routes",
+			"item": [
+				{
+					"name": "Routes - List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Routes - Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"1187bce3-1cbf-4a85-a489-f1ba49c62fef\",  \n  \"service\": {\n    \"id\": \"ba2db486-3adf-44cb-b037-964da1facf55\"\n  },\n  \"name\": \"route-backend-ia\",\n  \"paths\": [\n    \"/backend/ia\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Routes - Add Altenativa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\",\n  \"service\": {\n    \"id\": \"ba2db486-3adf-44cb-b037-964da1facf55\"\n  },\n  \"name\": \"route-backend-ia-altenativa\",\n  \"paths\": [\n    \"/backend/ai\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Routes - Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/routes/1187bce3-1cbf-4a85-a489-f1ba49c62fef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"routes",
+								"1187bce3-1cbf-4a85-a489-f1ba49c62fef"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Plugins",
+			"item": [
+				{
+					"name": "IP Restriction",
+					"item": [
+						{
+							"name": "Plugins - Add IP Restriction",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"8e2b3ef6-22e8-4496-b158-51be5d713714\",\n    \"enabled\": true,\n    \"name\": \"ip-restriction\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"instance_name\": \"ip-restriction-backend-ia-route2\",\n    \"config\": {\n        \"allow\": [\n            \"200.200.200.200\"\n        ],\n        \"message\": \"Seu IP foi banido\",\n        \"status\": 403\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8001/services/ba2db486-3adf-44cb-b037-964da1facf55/plugins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"services",
+										"ba2db486-3adf-44cb-b037-964da1facf55",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Remove IP Restriction",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/plugins/8e2b3ef6-22e8-4496-b158-51be5d713714",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"8e2b3ef6-22e8-4496-b158-51be5d713714"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Request Termination",
+					"item": [
+						{
+							"name": "Plugins - Add Request Termination",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"29e47017-8577-4065-83dc-ce57d2a0dc6a\",\n    \"name\": \"request-termination\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"instance_name\": \"request-termination-backend-ia-route2\",\n    \"config\": {\n        \"body\": \"{  \\\"status\\\": 503,   \\\"error\\\": \\\"Service Unavailable\\\",   \\\"message\\\": \\\"The service is temporarily unavailable. Please try again later.\\\"}\",\n        \"content_type\": \"application/json\",\n        \"status_code\": 503\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8001/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"routes",
+										"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Remove Request Termination",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/plugins/29e47017-8577-4065-83dc-ce57d2a0dc6a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"29e47017-8577-4065-83dc-ce57d2a0dc6a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Request Size Limiting",
+					"item": [
+						{
+							"name": "Plugins - Add Request Size Limiting (Global)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"df7e0211-9862-4ff7-b82a-01efac9c7a1b\",\n    \"name\": \"request-size-limiting\",\n    \"instance_name\": \"global-request-size-limiting\",\n    \"config\": {\n        \"allowed_payload_size\": 128,\n        \"require_content_length\": false,\n        \"size_unit\": \"megabytes\"\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8001/default/plugins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"default",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Remove Request Size Limiting (Global)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/plugins/df7e0211-9862-4ff7-b82a-01efac9c7a1b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"df7e0211-9862-4ff7-b82a-01efac9c7a1b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test - Request Size Limiting",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Request size limit exceeded",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/backend/ai",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"backend",
+										"ai"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Add Request Size Limiting (Scoped)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"698c33d4-d949-4f7b-a1f5-8c466b86c455\",\n    \"name\": \"request-size-limiting\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"config\": {\n        \"allowed_payload_size\": 7,\n        \"require_content_length\": false,\n        \"size_unit\": \"bytes\"\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8001/default/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"default",
+										"routes",
+										"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Remove Request Size Limiting (Scoped)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/plugins/698c33d4-d949-4f7b-a1f5-8c466b86c455",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"698c33d4-d949-4f7b-a1f5-8c466b86c455"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Proxy Cache",
+					"item": [
+						{
+							"name": "Plugins - Add Proxy Cache",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"a7c5fd07-3b20-4c42-a697-783f914b0d7f\",\n    \"name\": \"proxy-cache\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"config\": {\n        \"cache_control\": false,\n        \"cache_ttl\": 10,\n        \"content_type\": [\n            \"application/json; charset=utf-8\"\n        ],\n        \"request_method\": [\n            \"GET\",\n            \"HEAD\"\n        ],\n        \"response_code\": [\n            200\n        ],\n        \"strategy\": \"memory\"\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8001/default/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"default",
+										"routes",
+										"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test - Proxy Cache",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/backend/ai",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"backend",
+										"ai"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Remove Proxy Cache",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/plugins/a7c5fd07-3b20-4c42-a697-783f914b0d7f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"a7c5fd07-3b20-4c42-a697-783f914b0d7f"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rate Limiting",
+					"item": [
+						{
+							"name": "Plugins - Add Rate Limiting",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"d8516bd3-ddb2-413c-b6fe-9925a3d3729b\",\n    \"name\": \"rate-limiting\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"config\": {\n        \"error_code\": 429,\n        \"error_message\": \"API rate limit exceeded\",\n        \"month\": 300,\n        \"hour\": 100,\n        \"minute\": 30,\n        \"second\": 10,\n        \"policy\": \"local\"\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8001/default/routes/3aeb21fa-8b43-40f8-a3e8-2dae99d9734e/plugins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"default",
+										"routes",
+										"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check Response Header - Rate Limiting",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/backend/ai",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"backend",
+										"ai"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plugins - Rate Limiting",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8001/plugins/d8516bd3-ddb2-413c-b6fe-9925a3d3729b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"d8516bd3-ddb2-413c-b6fe-9925a3d3729b"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Plugins - List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/plugins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

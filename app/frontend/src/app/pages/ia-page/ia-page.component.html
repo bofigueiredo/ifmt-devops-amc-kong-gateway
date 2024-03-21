@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="header">
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Informe um id"
+        (keyup)="onSearchChange($event)"
+      />
+    </div>
+
+    <div (click)="logout()" class="logout-btn">Logout</div>
+  </div>
+
+  <div class="list-container">
+    <div *ngFor="let ia of iaList">
+        {{ ia.id }} - {{ ia.tema }}    
+    </div>
+  </div>
+</div>
