@@ -81,6 +81,8 @@ Você precisará ter instalado na sua maquina:
 - Docker
 - Visual Studio Code
     - [Extensão] Dev Container - Microsoft 
+    - [Extensão] REST Client - Huachao Mao ou Postman/Insomnia
+
 
 ### Iniciando os containers
 

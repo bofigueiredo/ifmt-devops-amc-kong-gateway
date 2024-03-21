@@ -10,25 +10,6 @@
 			"name": "Server",
 			"item": [
 				{
-					"name": "List Endpoints",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8001/endpoints",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8001",
-							"path": [
-								"endpoints"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Server Status",
 					"request": {
 						"method": "GET",
@@ -342,72 +323,7 @@
 							"name": "Plugins - Add Request Termination",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json, text/plain, */*"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-									},
-									{
-										"key": "Cache-Control",
-										"value": "no-cache"
-									},
-									{
-										"key": "Connection",
-										"value": "keep-alive"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Origin",
-										"value": "http://localhost:8002"
-									},
-									{
-										"key": "Referer",
-										"value": "http://localhost:8002/"
-									},
-									{
-										"key": "Sec-Fetch-Dest",
-										"value": "empty"
-									},
-									{
-										"key": "Sec-Fetch-Mode",
-										"value": "cors"
-									},
-									{
-										"key": "Sec-Fetch-Site",
-										"value": "same-site"
-									},
-									{
-										"key": "User-Agent",
-										"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-									},
-									{
-										"key": "X-Kong-Manager-Version",
-										"value": "3.6.1.1"
-									},
-									{
-										"key": "X-Request-Source",
-										"value": "kong-manager"
-									},
-									{
-										"key": "sec-ch-ua",
-										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
-									},
-									{
-										"key": "sec-ch-ua-mobile",
-										"value": "?0"
-									},
-									{
-										"key": "sec-ch-ua-platform",
-										"value": "\"Linux\""
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"id\": \"29e47017-8577-4065-83dc-ce57d2a0dc6a\",\n    \"name\": \"request-termination\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"instance_name\": \"request-termination-backend-ia-route2\",\n    \"config\": {\n        \"body\": \"{  \\\"status\\\": 503,   \\\"error\\\": \\\"Service Unavailable\\\",   \\\"message\\\": \\\"The service is temporarily unavailable. Please try again later.\\\"}\",\n        \"content_type\": \"application/json\",\n        \"status_code\": 503\n    }\n}"
@@ -457,72 +373,7 @@
 							"name": "Plugins - Add Request Size Limiting (Global)",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json, text/plain, */*"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-									},
-									{
-										"key": "Cache-Control",
-										"value": "no-cache"
-									},
-									{
-										"key": "Connection",
-										"value": "keep-alive"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Origin",
-										"value": "http://localhost:8002"
-									},
-									{
-										"key": "Referer",
-										"value": "http://localhost:8002/"
-									},
-									{
-										"key": "Sec-Fetch-Dest",
-										"value": "empty"
-									},
-									{
-										"key": "Sec-Fetch-Mode",
-										"value": "cors"
-									},
-									{
-										"key": "Sec-Fetch-Site",
-										"value": "same-site"
-									},
-									{
-										"key": "User-Agent",
-										"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-									},
-									{
-										"key": "X-Kong-Manager-Version",
-										"value": "3.6.1.1"
-									},
-									{
-										"key": "X-Request-Source",
-										"value": "kong-manager"
-									},
-									{
-										"key": "sec-ch-ua",
-										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
-									},
-									{
-										"key": "sec-ch-ua-mobile",
-										"value": "?0"
-									},
-									{
-										"key": "sec-ch-ua-platform",
-										"value": "\"Linux\""
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"id\": \"df7e0211-9862-4ff7-b82a-01efac9c7a1b\",\n    \"name\": \"request-size-limiting\",\n    \"instance_name\": \"global-request-size-limiting\",\n    \"config\": {\n        \"allowed_payload_size\": 128,\n        \"require_content_length\": false,\n        \"size_unit\": \"megabytes\"\n    }\n}"
@@ -598,72 +449,7 @@
 							"name": "Plugins - Add Request Size Limiting (Scoped)",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json, text/plain, */*"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-									},
-									{
-										"key": "Cache-Control",
-										"value": "no-cache"
-									},
-									{
-										"key": "Connection",
-										"value": "keep-alive"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Origin",
-										"value": "http://localhost:8002"
-									},
-									{
-										"key": "Referer",
-										"value": "http://localhost:8002/"
-									},
-									{
-										"key": "Sec-Fetch-Dest",
-										"value": "empty"
-									},
-									{
-										"key": "Sec-Fetch-Mode",
-										"value": "cors"
-									},
-									{
-										"key": "Sec-Fetch-Site",
-										"value": "same-site"
-									},
-									{
-										"key": "User-Agent",
-										"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-									},
-									{
-										"key": "X-Kong-Manager-Version",
-										"value": "3.6.1.1"
-									},
-									{
-										"key": "X-Request-Source",
-										"value": "kong-manager"
-									},
-									{
-										"key": "sec-ch-ua",
-										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
-									},
-									{
-										"key": "sec-ch-ua-mobile",
-										"value": "?0"
-									},
-									{
-										"key": "sec-ch-ua-platform",
-										"value": "\"Linux\""
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"id\": \"698c33d4-d949-4f7b-a1f5-8c466b86c455\",\n    \"name\": \"request-size-limiting\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"config\": {\n        \"allowed_payload_size\": 7,\n        \"require_content_length\": false,\n        \"size_unit\": \"bytes\"\n    }\n}"
@@ -714,72 +500,7 @@
 							"name": "Plugins - Add Proxy Cache",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json, text/plain, */*"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-									},
-									{
-										"key": "Cache-Control",
-										"value": "no-cache"
-									},
-									{
-										"key": "Connection",
-										"value": "keep-alive"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Origin",
-										"value": "http://localhost:8002"
-									},
-									{
-										"key": "Referer",
-										"value": "http://localhost:8002/"
-									},
-									{
-										"key": "Sec-Fetch-Dest",
-										"value": "empty"
-									},
-									{
-										"key": "Sec-Fetch-Mode",
-										"value": "cors"
-									},
-									{
-										"key": "Sec-Fetch-Site",
-										"value": "same-site"
-									},
-									{
-										"key": "User-Agent",
-										"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-									},
-									{
-										"key": "X-Kong-Manager-Version",
-										"value": "3.6.1.1"
-									},
-									{
-										"key": "X-Request-Source",
-										"value": "kong-manager"
-									},
-									{
-										"key": "sec-ch-ua",
-										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
-									},
-									{
-										"key": "sec-ch-ua-mobile",
-										"value": "?0"
-									},
-									{
-										"key": "sec-ch-ua-platform",
-										"value": "\"Linux\""
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"id\": \"a7c5fd07-3b20-4c42-a697-783f914b0d7f\",\n    \"name\": \"proxy-cache\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"config\": {\n        \"cache_control\": false,\n        \"cache_ttl\": 10,\n        \"content_type\": [\n            \"application/json; charset=utf-8\"\n        ],\n        \"request_method\": [\n            \"GET\",\n            \"HEAD\"\n        ],\n        \"response_code\": [\n            200\n        ],\n        \"strategy\": \"memory\"\n    }\n}"
@@ -850,72 +571,7 @@
 							"name": "Plugins - Add Rate Limiting",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json, text/plain, */*"
-									},
-									{
-										"key": "Accept-Language",
-										"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-									},
-									{
-										"key": "Cache-Control",
-										"value": "no-cache"
-									},
-									{
-										"key": "Connection",
-										"value": "keep-alive"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Origin",
-										"value": "http://localhost:8002"
-									},
-									{
-										"key": "Referer",
-										"value": "http://localhost:8002/"
-									},
-									{
-										"key": "Sec-Fetch-Dest",
-										"value": "empty"
-									},
-									{
-										"key": "Sec-Fetch-Mode",
-										"value": "cors"
-									},
-									{
-										"key": "Sec-Fetch-Site",
-										"value": "same-site"
-									},
-									{
-										"key": "User-Agent",
-										"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-									},
-									{
-										"key": "X-Kong-Manager-Version",
-										"value": "3.6.1.1"
-									},
-									{
-										"key": "X-Request-Source",
-										"value": "kong-manager"
-									},
-									{
-										"key": "sec-ch-ua",
-										"value": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\""
-									},
-									{
-										"key": "sec-ch-ua-mobile",
-										"value": "?0"
-									},
-									{
-										"key": "sec-ch-ua-platform",
-										"value": "\"Linux\""
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"id\": \"d8516bd3-ddb2-413c-b6fe-9925a3d3729b\",\n    \"name\": \"rate-limiting\",\n    \"route\": {\n        \"id\": \"3aeb21fa-8b43-40f8-a3e8-2dae99d9734e\"\n    },\n    \"config\": {\n        \"error_code\": 429,\n        \"error_message\": \"API rate limit exceeded\",\n        \"month\": 300,\n        \"hour\": 100,\n        \"minute\": 30,\n        \"second\": 10,\n        \"policy\": \"local\"\n    }\n}"
