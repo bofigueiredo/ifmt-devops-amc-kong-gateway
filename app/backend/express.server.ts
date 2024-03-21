@@ -28,8 +28,8 @@ app.use(
     origin: true,
   }),
   bodyParser.json(),  
-//  keycloak.middleware(),
-//  keycloak.protect()
+  keycloak.middleware(),
+  keycloak.protect()
 );
 
 
@@ -39,8 +39,8 @@ const devopsList: Theme[] = devopsData;
 
 let count = 0;
 
-app.get("/ia", (req: Request, res: Response) => {
-//app.get("/ia", keycloak.protect('realm:ia-list'), (req: Request, res: Response) => {
+//app.get("/ia", (req: Request, res: Response) => {
+app.get("/ia", keycloak.protect('realm:ia-list'), (req: Request, res: Response) => {
   count++
   console.log(`REQUEST GET /IA - Count:${count}`);
   res.json(iaList);
