@@ -1,0 +1,11 @@
+@url-base=localhost
+
+# @name login
+POST {{url-base}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+
+}
+
+###
